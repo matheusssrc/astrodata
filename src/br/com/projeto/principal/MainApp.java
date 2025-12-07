@@ -10,19 +10,19 @@ public class MainApp {
 
     public static void main(String[] args) {
 
-        // 1. Configura o visual para parecer um programa nativo do Sistema Operacional
+        // 1. Configura o visual nativo (Corrige o aviso de "Multicatch")
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
             System.err.println("Aviso: Não foi possível carregar o visual nativo (" + e.getMessage() + ")");
         }
 
-        // 2. Inicializa o Backend (Carrega dados do Banco, TXT ou RAM)
-        // Isso é feito ANTES de abrir a janela para garantir que os dados já existam
+        // 2. Inicializa o Backend
         GerenciadorCorposCelestes gerenciador = new GerenciadorCorposCelestes();
 
-        // 3. Inicia a Interface Gráfica na Thread de Eventos do Swing (Padrão obrigatório)
+        // 3. Inicia a Interface
         SwingUtilities.invokeLater(() -> {
+            // Corrige o aviso "New instance ignored" atribuindo a uma variável
             MainFrame frame = new MainFrame(gerenciador);
             frame.setVisible(true);
         });
